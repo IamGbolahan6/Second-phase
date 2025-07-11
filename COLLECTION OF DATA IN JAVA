@@ -1,0 +1,38 @@
+import java.io.File;         // To create the files
+import java.io.FileWriter;   // To write to a file
+import java.io.IOException;  // To manage input/output errors
+import java.util.Scanner;    // To read from a file
+
+public class SimpleFileHandling {
+
+    public static void main(String[] args) {
+        try {
+            //This is to create or reference the file taht is named sample.txt
+            File myFile = new File("sample.txt");
+            if (myFile.createNewFile()) {
+                System.out.println("File created: " + myFile.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+
+            // This is writing to the file using FileWriter
+            FileWriter writer = new FileWriter("sample.txt");
+            writer.write("Learning is fun\nLet's keep learning .");
+            writer.close(); // It is closed after writing so as to close the output stream source.
+            System.out.println("Successfully wrote to the file.");
+
+            // Step 3: Reading from the file using Scanner
+            Scanner reader = new Scanner(myFile);
+            System.out.println("Reading from file:");
+            while (reader.hasNextLine()) {
+                System.out.println(reader.nextLine());
+            }
+            reader.close(); // Always close after reading
+
+        } catch (IOException e) {
+            // to correct any error made in the file I/O errors
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+}
